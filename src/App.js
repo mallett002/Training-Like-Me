@@ -7,7 +7,7 @@ const signIn = () => {
 
 const App = () => (
   <div>
-    <h1>Training Like Me</h1>
+    <h1>Train Like Me</h1>
     <h3>Sign in</h3>
 
     <form onSubmit={signIn}>
