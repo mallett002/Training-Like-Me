@@ -6,11 +6,11 @@ import {Provider} from 'react-redux';
 import store from './store-factory';
 import * as serviceWorker from './serviceWorker';
 
-const StoreConnector = () => (
+const AppWithStore = () => (
   <Provider store={store}>
     <App />
   </Provider>
 );
 
-ReactDOM.render(<StoreConnector />, document.getElementById('root'));
+ReactDOM.render(<AppWithStore />, document.getElementById('root'));
 serviceWorker.unregister();
