@@ -1,15 +1,8 @@
-import { applyMiddleware, compose, createStore } from 'redux';
-import thunk from 'redux-thunk';
-import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';
-import rootReducer from '../root-reducer';
 import config from '../firebase/config';
-import firebase from 'firebase';
-
-// react-redux-firebase options
-const reduxFirebaseConfig = {
-    userProfile: 'users', // firebase root where user profiles are stored
-    enableLogging: true, // enable/disable Firebase's database logging
-};
+import {createStore} from 'redux';
+import firebase from 'firebase/app';
+import rootReducer from '../root-reducer';
+import 'firebase/auth';
 
 firebase.initializeApp(config);
   
@@ -17,13 +10,7 @@ const initialState = {};
 
 const store = createStore(
     rootReducer,
-    initialState,
-    compose(
-        reactReduxFirebase(firebase, reduxFirebaseConfig),
-        applyMiddleware(
-            thunk.withExtraArgument(getFirebase)
-        )
-    )
+    initialState
 );
 
 export default store;
