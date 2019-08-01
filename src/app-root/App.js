@@ -1,20 +1,75 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
+import { compose } from "redux";
+import { connect } from "react-redux";
+import { withFirebase, isLoaded, isEmpty } from "react-redux-firebase";
 
-const signIn = () => {
-  alert('You successfully signed in!');
-};
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      password: '',
+    };
+  }
 
-const App = () => (
-  <div>
-    <h1>Train Like Me</h1>
-    <h3>Sign in</h3>
+  setEmail = (e) => {
+    this.setState({ email: e.target.value });
+  }
 
-    <form onSubmit={signIn}>
-    <input />
-    <button>Submit</button>
-    </form>    
-  </div>
-);
+  setPassword = (e) => {
+    this.setState({ password: e.target.value });
+  }
 
-export default App;
+  logUserIn = () => {
+    this.props.firebase.login(this.state.email, this.state.password);
+  }
+
+  createNewUser = () => {
+    this.props.firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password);
+  }
+
+  render() {
+    const { auth, firebase } = this.props;
+
+    return (
+      <div>
+        {!isLoaded(auth) && <span>Loading...</span>}
+        {isEmpty(auth) && (
+          <div>
+            <span>Please Login</span>
+            <input
+              placeholder='email'
+              type='text'
+              onChange={this.setEmail}
+            />
+            <input
+              placeholder='password'
+              type='text'
+              onChange={this.setPassword}
+            />
+
+            <button onClick={this.logUserIn}>login</button>
+            <button onClick={this.createNewUser}>create</button>
+          </div>
+        )}
+
+        {isLoaded(auth) && !isEmpty(auth) && (
+          <div className="App">
+            <header className="App-header">
+              <p>
+                Edit <code>src/App.js</code> and save to reload.
+              </p>
+              <button onClick={() => { firebase.auth().signOut() }}>logout</button>
+            </header>
+          </div>
+        )}
+      </div>
+    );
+  }
+}
+
+export default compose(
+  withFirebase,
+  connect(({ firebase: { auth } }) => ({ auth }))
+)(App)
