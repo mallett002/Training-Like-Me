@@ -1,4 +1,4 @@
-import AppRoot from './app-root/App';
+import AppRoot from './app-root';
 import config from './firebase/config';
 import firebase from 'firebase/app';
 import React from 'react';

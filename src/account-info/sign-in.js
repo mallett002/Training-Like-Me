@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { compose } from "redux";
 import { withFirebase, isLoaded, isEmpty } from "react-redux-firebase";
@@ -29,25 +30,31 @@ class SignIn extends Component {
 
     return (
       <div>
-        {!isLoaded(auth) && <span>Loading...</span>}
-        {isEmpty(auth) && (
-          <div>
-            <span>Please Login</span>
-            <input
-              placeholder='email'
-              type='text'
-              onChange={this.setEmail}
-            />
-            <input
-              placeholder='password'
-              type='text'
-              onChange={this.setPassword}
-            />
+        <div>
+            <h1>Log In</h1>
+            <div>
+                <span>Please Login</span>
+                <input
+                placeholder='email'
+                type='text'
+                onChange={this.setEmail}
+                />
+                <input
+                placeholder='password'
+                type='text'
+                onChange={this.setPassword}
+                />
 
-            <button onClick={this.logUserIn}>login</button>
-          </div>
-        )}
-
+                <button onClick={this.logUserIn}>login</button>
+            </div>
+            <div>
+                <p>Don't have an account?</p>
+                <Link to='/sign-up'>
+                    <button>Sign Up</button>
+                </Link>
+            </div>
+        </div>
+        
         {isLoaded(auth) && !isEmpty(auth) && (
           <div className="App">
             <header className="App-header">

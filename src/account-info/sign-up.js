@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from "redux";
 import { withFirebase } from "react-redux-firebase";
+import { Link } from 'react-router-dom';
 
 class SignUp extends Component {
   constructor(props) {
@@ -27,8 +28,8 @@ class SignUp extends Component {
   render() {
     return (
       <div>
+          <h1>Create An Account</h1>
           <div>
-            <span>Please Login</span>
             <input
               placeholder='email'
               type='text'
@@ -39,9 +40,14 @@ class SignUp extends Component {
               type='text'
               onChange={this.setPassword}
             />
-
             <button onClick={this.createNewUser}>create</button>
           </div>
+          <div>
+            <p>Already have an account?</p>
+                <Link to='/sign-in'>
+                    <button>Sign In</button>
+                </Link>
+                </div>
       </div>
     );
   }
@@ -52,7 +58,5 @@ SignUp.propTypes = {
 };
 
 export default compose(
-  // firebase sdk
   withFirebase,
-  // connect(({ firebase: { auth } }) => ({ auth })) // dont need this to access firebase. withFirebase gives us it.
 )(SignUp);

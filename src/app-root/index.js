@@ -9,14 +9,14 @@ const AppRoot = (props) => {
         Object.keys(ROUTES).map(route => 
           <Route
             exact
+            key={route}
             path={ROUTES[route].path}
             component={ROUTES[route].component}
           />
         ))}
         <Redirect to={ROUTES.signIn.path} />
     </Switch>
-    
-  )
+  );
 };
 
 export default AppRoot;
