@@ -1,13 +1,14 @@
-import App from './app-root/App';
+import AppRoot from './app-root/App';
+import config from './firebase/config';
 import firebase from 'firebase/app';
-import {Provider} from 'react-redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
-import { createFirestoreInstance } from 'redux-firestore';
 import store from './store/configure-store';
+import { createFirestoreInstance } from 'redux-firestore';
+import { Provider } from 'react-redux';
+import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
+import { BrowserRouter } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
-import config from './firebase/config';
 import './index.css';
 import 'firebase/auth';
 import 'firebase/database';
@@ -28,8 +29,6 @@ const rrfProps = {
     createFirestoreInstance
 }
 
-console.log({config});
-
 firebase.initializeApp(config);
 firebase.firestore();
 firebase.functions();
@@ -37,7 +36,9 @@ firebase.functions();
 const AppWithStore = () => (
   <Provider store={store}>
     <ReactReduxFirebaseProvider {...rrfProps}>
-      <App />
+      <BrowserRouter>
+        <AppRoot />
+      </BrowserRouter>
     </ReactReduxFirebaseProvider>
   </Provider>
 );
