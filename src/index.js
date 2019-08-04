@@ -7,7 +7,7 @@ import store from './store/configure-store';
 import { createFirestoreInstance } from 'redux-firestore';
 import { Provider } from 'react-redux';
 import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
-import { BrowserRouter } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
 import * as serviceWorker from './serviceWorker';
 import './index.css';
 import 'firebase/auth';
@@ -15,6 +15,7 @@ import 'firebase/database';
 import 'firebase/storage';
 import 'firebase/firestore';
 import 'firebase/functions';
+import { browserHistory } from './root-reducer';
 
 
 const reduxFirebaseConfig = {
@@ -27,7 +28,7 @@ const rrfProps = {
     config: reduxFirebaseConfig,
     dispatch: store.dispatch,
     createFirestoreInstance
-}
+};
 
 firebase.initializeApp(config);
 firebase.firestore();
@@ -36,9 +37,9 @@ firebase.functions();
 const AppWithStore = () => (
   <Provider store={store}>
     <ReactReduxFirebaseProvider {...rrfProps}>
-      <BrowserRouter>
+      <ConnectedRouter history={browserHistory}>
         <AppRoot />
-      </BrowserRouter>
+      </ConnectedRouter>
     </ReactReduxFirebaseProvider>
   </Provider>
 );

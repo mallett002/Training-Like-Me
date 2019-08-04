@@ -35,14 +35,14 @@ class SignIn extends Component {
             <div>
                 <span>Please Login</span>
                 <input
-                placeholder='email'
-                type='text'
-                onChange={this.setEmail}
+                    placeholder='email'
+                    type='text'
+                    onChange={this.setEmail}
                 />
                 <input
-                placeholder='password'
-                type='text'
-                onChange={this.setPassword}
+                    placeholder='password'
+                    type='text'
+                    onChange={this.setPassword}
                 />
 
                 <button onClick={this.logUserIn}>login</button>

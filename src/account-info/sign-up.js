@@ -44,10 +44,10 @@ class SignUp extends Component {
           </div>
           <div>
             <p>Already have an account?</p>
-                <Link to='/sign-in'>
-                    <button>Sign In</button>
-                </Link>
-                </div>
+            <Link to='/sign-in'>
+                <button>Sign In</button>
+            </Link>
+        </div>
       </div>
     );
   }
