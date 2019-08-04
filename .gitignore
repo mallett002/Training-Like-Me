@@ -17,7 +17,9 @@
 .env.development
 .env.test.local
 .env.production
+.vscode/
 npm-debug.log*
+todo
 yarn-debug.log*
 yarn-error.log*
 
