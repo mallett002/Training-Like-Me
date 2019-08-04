@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { compose } from "redux";
-import { withFirebase, isLoaded, isEmpty } from "react-redux-firebase";
+import { withFirebase } from "react-redux-firebase";
 
-class SignIn extends Component {
+class LogIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,10 +26,8 @@ class SignIn extends Component {
   }
 
   render() {
-    const { auth, firebase } = this.props;
 
     return (
-      <div>
         <div>
             <h1>Log In</h1>
             <div>
@@ -54,26 +52,14 @@ class SignIn extends Component {
                 </Link>
             </div>
         </div>
-        
-        {isLoaded(auth) && !isEmpty(auth) && (
-          <div className="App">
-            <header className="App-header">
-              <p>
-                Edit <code>src/App.js</code> and save to reload.
-              </p>
-              <button onClick={() => { firebase.auth().signOut() }}>logout</button>
-            </header>
-          </div>
-        )}
-      </div>
     );
   }
 }
 
-SignIn.propTypes = {
+LogIn.propTypes = {
     firebase: PropTypes.object.isRequired
 };
 
 export default compose(
   withFirebase,
-)(SignIn);
+)(LogIn);

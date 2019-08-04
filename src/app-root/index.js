@@ -1,6 +1,6 @@
 import React from 'react';
 import {Redirect, Route, Switch} from 'react-router-dom';
-import ROUTES from '../routes/routes';
+import ROUTES, { LOG_IN } from '../routes/routes';
 
 const AppRoot = (props) => {
   return (
@@ -14,7 +14,7 @@ const AppRoot = (props) => {
             component={ROUTES[route].component}
           />
         ))}
-        <Redirect to={ROUTES.signIn.path} />
+        <Redirect to={ROUTES[LOG_IN].path} />
     </Switch>
   );
 };
