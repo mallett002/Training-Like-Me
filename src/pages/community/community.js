@@ -1,5 +1,8 @@
 import React from 'react';
+import { UserIsAuthenticated } from '../../auth/auth-user';
 
-export default () => (
+const Community = () => (
     <div>Welcome to Train Like Me!</div>
 );
+
+export default UserIsAuthenticated(Community);

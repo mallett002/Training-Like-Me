@@ -8,13 +8,13 @@ const AppRoot = (props) => {
       {(
         Object.keys(ROUTES).map(route => 
           <Route
-            exact
+            exact={true}
             key={route}
             path={ROUTES[route].path}
             component={ROUTES[route].component}
           />
-        ))}
-        <Redirect to={ROUTES[LOG_IN].path} />
+      ))}
+      <Redirect to={ROUTES[LOG_IN].path} />
     </Switch>
   );
 };

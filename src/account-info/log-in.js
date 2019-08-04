@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { compose } from "redux";
 import { withFirebase } from "react-redux-firebase";
+import ROUTES, { COMMUNITY, SIGN_UP } from '../routes/routes';
+import { goToRoute } from '../routes/navigation';
 
 class LogIn extends Component {
   constructor(props) {
@@ -22,7 +23,12 @@ class LogIn extends Component {
   }
 
   logUserIn = () => {
-    this.props.firebase.login(this.state.email, this.state.password);
+    try {
+      this.props.firebase.login(this.state.email, this.state.password);
+      goToRoute(ROUTES[COMMUNITY].path);
+    } catch {
+      console.log('Error logging in');
+    }
   }
 
   render() {
@@ -47,9 +53,9 @@ class LogIn extends Component {
             </div>
             <div>
                 <p>Don't have an account?</p>
-                <Link to='/sign-up'>
-                    <button>Sign Up</button>
-                </Link>
+                    <button onClick={() => goToRoute(SIGN_UP)}>
+                      Sign Up
+                    </button>
             </div>
         </div>
     );
