@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { compose } from "redux";
-import { withFirebase } from "react-redux-firebase";
-import { Link } from 'react-router-dom';
+import { LOG_IN } from '../../routes/routes';
+import { goToRoute } from '../../routes/navigation';
 
 class SignUp extends Component {
   constructor(props) {
@@ -44,9 +43,9 @@ class SignUp extends Component {
           </div>
           <div>
             <p>Already have an account?</p>
-            <Link to='/sign-in'>
-                <button>Sign In</button>
-            </Link>
+                <button onClick={() => goToRoute(LOG_IN)}>
+                  Sign In
+                </button>
         </div>
       </div>
     );
@@ -57,6 +56,4 @@ SignUp.propTypes = {
     firebase: PropTypes.object.isRequired
 };
 
-export default compose(
-  withFirebase,
-)(SignUp);
+export default SignUp;

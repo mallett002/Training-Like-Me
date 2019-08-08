@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { compose } from "redux";
-import { withFirebase, isLoaded, isEmpty } from "react-redux-firebase";
+import { COMMUNITY, SIGN_UP } from '../../routes/routes';
+import { goToRoute } from '../../routes/navigation';
 
-class SignIn extends Component {
+class LogIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,7 +13,7 @@ class SignIn extends Component {
   }
 
   setEmail = (e) => {
-    this.setState({ email: e.target.value });
+    this.setState({ email: e.target.value.toString() });
   }
 
   setPassword = (e) => {
@@ -22,14 +21,19 @@ class SignIn extends Component {
   }
 
   logUserIn = () => {
-    this.props.firebase.login(this.state.email, this.state.password);
+    try {
+      this.props.firebase.login({
+        email: this.state.email, 
+        password: this.state.password
+      });
+      goToRoute(COMMUNITY);
+    } catch(error) {
+      console.log({error});
+    }
   }
 
   render() {
-    const { auth, firebase } = this.props;
-
     return (
-      <div>
         <div>
             <h1>Log In</h1>
             <div>
@@ -44,36 +48,21 @@ class SignIn extends Component {
                     type='text'
                     onChange={this.setPassword}
                 />
-
                 <button onClick={this.logUserIn}>login</button>
             </div>
             <div>
-                <p>Don't have an account?</p>
-                <Link to='/sign-up'>
-                    <button>Sign Up</button>
-                </Link>
+              <p>Don't have an account?</p>
+              <button onClick={() => goToRoute(SIGN_UP)}>
+                Sign Up
+              </button>
             </div>
         </div>
-        
-        {isLoaded(auth) && !isEmpty(auth) && (
-          <div className="App">
-            <header className="App-header">
-              <p>
-                Edit <code>src/App.js</code> and save to reload.
-              </p>
-              <button onClick={() => { firebase.auth().signOut() }}>logout</button>
-            </header>
-          </div>
-        )}
-      </div>
     );
   }
 }
 
-SignIn.propTypes = {
+LogIn.propTypes = {
     firebase: PropTypes.object.isRequired
 };
 
-export default compose(
-  withFirebase,
-)(SignIn);
+export default LogIn;

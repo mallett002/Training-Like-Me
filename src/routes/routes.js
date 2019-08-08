@@ -1,29 +1,29 @@
-import SignIn from '../account-info/sign-in';
-import SignUp from '../account-info/sign-up';
+import LogIn from '../pages/log-in';
+import SignUp from '../pages/sign-up';
+import Community from '../pages/community';
 
-const SIGN_IN = 'signIn';
-const SIGN_UP = 'signUp';
-const COMMUNITY = 'community';
-const TRAINING = 'training';
-
+export const LOG_IN = '/log-in';
+export const SIGN_UP = '/sign-up';
+export const COMMUNITY = '/users/:user/community';
+export const TRAINING = '/users/:user/training';
 
 export default {
-    [SIGN_IN]: {
-        path: '/sign-in',
-        component: SignIn
+    [COMMUNITY]: {
+        path: COMMUNITY,
+        component: Community
+    },
+    [LOG_IN]: {
+        path: LOG_IN,
+        component: LogIn
     },
     [SIGN_UP]: {
-        path: '/sign-up',
+        path: SIGN_UP,
         component: SignUp
     },
-    
-    // TODO: will change these routes when get there...
-    [COMMUNITY]: {
-        path: '/:user/community',
-        component: 'communityComponent'
-    },
+
+    // TODO: do this one
     [TRAINING]: {
-        path: '/:user/community',
-        component: 'userTranings'
+        path: TRAINING,
+        component: 'userTrainings'
     }
 };
