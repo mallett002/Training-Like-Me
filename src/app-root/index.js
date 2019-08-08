@@ -2,7 +2,7 @@ import React from 'react';
 import {Redirect, Route, Switch} from 'react-router-dom';
 import ROUTES, { LOG_IN } from '../routes/routes';
 
-const AppRoot = (props) => {
+const AppRoot = () => {
   return (
     <Switch>
       {(

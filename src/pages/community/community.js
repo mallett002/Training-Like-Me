@@ -1,8 +1,10 @@
 import React from 'react';
-import { UserIsAuthenticated } from '../../auth/auth-user';
 
-const Community = () => (
-    <div>Welcome to Train Like Me!</div>
+const Community = (props) => (
+    <div>
+        <p>Welcome to Train Like Me!</p>
+        <button onClick={() => props.firebase.logout()}>sign out</button>
+    </div>
 );
 
-export default UserIsAuthenticated(Community);
+export default Community;

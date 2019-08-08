@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { compose } from "redux";
-import { withFirebase } from "react-redux-firebase";
-import ROUTES, { COMMUNITY, SIGN_UP } from '../routes/routes';
-import { goToRoute } from '../routes/navigation';
+import { COMMUNITY, SIGN_UP } from '../../routes/routes';
+import { goToRoute } from '../../routes/navigation';
 
 class LogIn extends Component {
   constructor(props) {
@@ -15,7 +13,7 @@ class LogIn extends Component {
   }
 
   setEmail = (e) => {
-    this.setState({ email: e.target.value });
+    this.setState({ email: e.target.value.toString() });
   }
 
   setPassword = (e) => {
@@ -24,15 +22,17 @@ class LogIn extends Component {
 
   logUserIn = () => {
     try {
-      this.props.firebase.login(this.state.email, this.state.password);
-      goToRoute(ROUTES[COMMUNITY].path);
-    } catch {
-      console.log('Error logging in');
+      this.props.firebase.login({
+        email: this.state.email, 
+        password: this.state.password
+      });
+      goToRoute(COMMUNITY);
+    } catch(error) {
+      console.log({error});
     }
   }
 
   render() {
-
     return (
         <div>
             <h1>Log In</h1>
@@ -48,14 +48,13 @@ class LogIn extends Component {
                     type='text'
                     onChange={this.setPassword}
                 />
-
                 <button onClick={this.logUserIn}>login</button>
             </div>
             <div>
-                <p>Don't have an account?</p>
-                    <button onClick={() => goToRoute(SIGN_UP)}>
-                      Sign Up
-                    </button>
+              <p>Don't have an account?</p>
+              <button onClick={() => goToRoute(SIGN_UP)}>
+                Sign Up
+              </button>
             </div>
         </div>
     );
@@ -66,6 +65,4 @@ LogIn.propTypes = {
     firebase: PropTypes.object.isRequired
 };
 
-export default compose(
-  withFirebase,
-)(LogIn);
+export default LogIn;
