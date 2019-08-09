@@ -5,6 +5,8 @@ import { goToRoute } from '../../routes/navigation';
 import { FirebaseContext } from '../../firebase';
 
 class SignUp extends Component {
+  static contextType = FirebaseContext;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -55,8 +57,6 @@ class SignUp extends Component {
     );
   }
 }
-
-SignUp.contextType = FirebaseContext;
 
 SignUp.propTypes = {
     firebase: PropTypes.object.isRequired

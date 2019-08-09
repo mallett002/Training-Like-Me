@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { COMMUNITY, SIGN_UP } from '../../routes/routes';
 import { goToRoute } from '../../routes/navigation';
+import { FirebaseContext } from '../../firebase';
 
 class LogIn extends Component {
+  static contextType = FirebaseContext;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -21,11 +24,11 @@ class LogIn extends Component {
   }
 
   logUserIn = () => {
+    const firebase = this.context;
+    const { email, password } = this.state;
+
     try {
-      this.props.firebase.login({
-        email: this.state.email, 
-        password: this.state.password
-      });
+      firebase.logInWithEmailAndPassword(email, password);
       goToRoute(COMMUNITY);
     } catch(error) {
       console.log({error});
