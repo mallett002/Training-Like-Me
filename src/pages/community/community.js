@@ -6,11 +6,11 @@ import { LOG_IN } from '../../routes/routes';
 class Community extends Component {
     static contextType = FirebaseContext;
 
-    onSignOut = () => {
+    onSignOut = async () => {
         const firebase = this.context;
 
         try {
-            firebase.logUserOut();
+            await firebase.logUserOut()
             goToRoute(LOG_IN);
         } catch(error) {
             console.log({error});
@@ -18,8 +18,6 @@ class Community extends Component {
     }
 
     render() {
-        const firebase = this.context;
-
         return (
             <div>
                 <p>Welcome to Train Like Me!</p>
@@ -29,5 +27,9 @@ class Community extends Component {
    }               
 }
   
+Community.propTypes = {
+    // add propTypes
+};
+    
 
 export default Community;

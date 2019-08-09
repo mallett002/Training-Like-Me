@@ -23,12 +23,12 @@ class LogIn extends Component {
     this.setState({ password: e.target.value });
   }
 
-  logUserIn = () => {
+  logUserIn = async() => {
     const firebase = this.context;
     const { email, password } = this.state;
 
     try {
-      firebase.logInWithEmailAndPassword(email, password);
+      await firebase.logInWithEmailAndPassword(email, password);
       goToRoute(COMMUNITY);
     } catch(error) {
       console.log({error});
@@ -65,7 +65,7 @@ class LogIn extends Component {
 }
 
 LogIn.propTypes = {
-    firebase: PropTypes.object.isRequired
+// add propTypes
 };
 
 export default LogIn;

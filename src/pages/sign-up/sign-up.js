@@ -23,11 +23,16 @@ class SignUp extends Component {
     this.setState({ password: e.target.value });
   }
 
-  createNewUser = () => {
+  createNewUser = async() => {
     const firebase = this.context;
     const { email, password } = this.state;
 
-    firebase.createNewUser(email, password);
+    try {
+      await firebase.createNewUser(email, password);
+      goToRoute(LOG_IN);
+    } catch(error) {
+      console.log({error});
+    }
   }
 
   render() {
@@ -59,7 +64,7 @@ class SignUp extends Component {
 }
 
 SignUp.propTypes = {
-    firebase: PropTypes.object.isRequired
+    // add PropTypes
 };
 
 export default SignUp;
