@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { LOG_IN } from '../../routes/routes';
 import { goToRoute } from '../../routes/navigation';
+import { FirebaseContext } from '../../firebase';
 
 class SignUp extends Component {
   constructor(props) {
@@ -21,7 +22,10 @@ class SignUp extends Component {
   }
 
   createNewUser = () => {
-    this.props.firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password);
+    const firebase = this.context;
+    const { email, password } = this.state;
+
+    firebase.createNewUser(email, password);
   }
 
   render() {
@@ -51,6 +55,8 @@ class SignUp extends Component {
     );
   }
 }
+
+SignUp.contextType = FirebaseContext;
 
 SignUp.propTypes = {
     firebase: PropTypes.object.isRequired
