@@ -28,6 +28,16 @@ class Firebase {
     logUserOut = () => {
         this.auth.signOut();
     }
+
+    onAuthUserListener = (next, fallback) => {
+        this.auth.onAuthStateChanged(user => {
+            if (user) {
+                next(user);
+            } else {
+                fallback();
+            }
+        });
+    }
 }
 
 export default Firebase;
