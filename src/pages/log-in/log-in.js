@@ -2,11 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { COMMUNITY, SIGN_UP } from '../../routes/routes';
 import { goToRoute } from '../../routes/navigation';
-import { FirebaseContext } from '../../firebase';
 
 class LogIn extends Component {
-  static contextType = FirebaseContext;
-
   constructor(props) {
     super(props);
     this.state = {
@@ -24,7 +21,7 @@ class LogIn extends Component {
   }
 
   logUserIn = async() => {
-    const firebase = this.context;
+    const { firebase } = this.props;
     const { email, password } = this.state;
 
     try {
@@ -65,7 +62,7 @@ class LogIn extends Component {
 }
 
 LogIn.propTypes = {
-// add propTypes
+  firebase: PropTypes.object.isRequired
 };
 
 export default LogIn;

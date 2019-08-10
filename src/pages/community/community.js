@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
-import { FirebaseContext } from '../../firebase';
+import PropTypes from 'prop-types';
 import { goToRoute } from '../../routes/navigation';
 import { LOG_IN } from '../../routes/routes';
 
 class Community extends Component {
-    static contextType = FirebaseContext;
 
     onSignOut = async () => {
-        const firebase = this.context;
+        const { firebase } = this.props;
 
         try {
             await firebase.logUserOut()
@@ -28,7 +27,7 @@ class Community extends Component {
 }
   
 Community.propTypes = {
-    // add propTypes
+    firebase: PropTypes.object.isRequired
 };
     
 
