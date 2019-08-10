@@ -7,6 +7,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import * as serviceWorker from './serviceWorker';
 import { browserHistory } from './root-reducer';
 import Firebase, { FirebaseContext } from './firebase';
+import './index.css';
 
 const AppWithStore = () => (
   <Provider store={store}>
