@@ -4,10 +4,10 @@ import { compose } from 'redux';
 import { withFirebase } from '../../firebase';
 
 const mapStateToProps = (state) => ({
-    // some stuff...
+    authUser: state.sessionState.authUser
 });
 
 export default compose(
     withFirebase,
-    connect(mapStateToProps)
+    connect(mapStateToProps),
 )(Community);
