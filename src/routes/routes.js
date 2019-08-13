@@ -4,8 +4,8 @@ import Community from '../pages/community';
 
 export const LOG_IN = '/log-in';
 export const SIGN_UP = '/sign-up';
-export const COMMUNITY = '/users/:user/community';
-export const TRAINING = '/users/:user/training';
+export const COMMUNITY = '/community';
+export const TRAINING = '/training';
 
 export default {
     [COMMUNITY]: {

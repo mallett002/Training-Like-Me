@@ -20,8 +20,16 @@ class SignUp extends Component {
     this.setState({ password: e.target.value });
   }
 
-  createNewUser = () => {
-    this.props.firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password);
+  createNewUser = async() => {
+    const { firebase } = this.props;
+    const { email, password } = this.state;
+
+    try {
+      await firebase.createNewUser(email, password);
+      goToRoute(LOG_IN);
+    } catch(error) {
+      console.log({error});
+    }
   }
 
   render() {
@@ -53,7 +61,7 @@ class SignUp extends Component {
 }
 
 SignUp.propTypes = {
-    firebase: PropTypes.object.isRequired
+  firebase: PropTypes.object.isRequired
 };
 
 export default SignUp;

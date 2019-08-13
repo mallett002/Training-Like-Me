@@ -1,14 +1,13 @@
-import { compose } from 'redux';
 import { connect } from 'react-redux';
 import Community from './community';
-import { firebaseConnect } from 'react-redux-firebase';
-import { UserIsAuthenticated } from '../../auth/auth-user';
+import { compose } from 'redux';
+import { withFirebase } from '../../firebase';
 
 const mapStateToProps = (state) => ({
-    auth: state.firebase.auth
+    authUser: state.sessionState.authUser
 });
 
 export default compose(
-    firebaseConnect(),
-    connect(mapStateToProps) 
-)(UserIsAuthenticated(Community));
+    withFirebase,
+    connect(mapStateToProps),
+)(Community);

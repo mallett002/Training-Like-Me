@@ -1,9 +1,8 @@
 import { applyMiddleware, createStore } from 'redux';
-import rootReducer from '../root-reducer';
-import thunk from 'redux-thunk';
-import 'firebase/auth';
-import { routerMiddleware } from 'connected-react-router';
 import { browserHistory } from '../root-reducer';
+import rootReducer from '../root-reducer';
+import { routerMiddleware } from 'connected-react-router';
+import thunk from 'redux-thunk';
   
 const initialState = {};
 
