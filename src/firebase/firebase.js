@@ -29,7 +29,7 @@ class Firebase {
         this.auth.signOut();
     }
 
-    onAuthUserListener = (next, fallback) => {
+    onAuthListener = (next, fallback) => {
         this.auth.onAuthStateChanged(user => {
             if (user) {
                 next(user);
