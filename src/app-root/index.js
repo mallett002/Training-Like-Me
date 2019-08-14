@@ -1,6 +1,7 @@
 import React from 'react';
 import {Redirect, Route, Switch} from 'react-router-dom';
 import ROUTES, { LOG_IN, SIGN_UP, COMMUNITY } from '../routes/routes';
+import withAuthentication from '../session/with-authentication';
 
 const AppRoot = () => (
   <Switch>
@@ -11,4 +12,4 @@ const AppRoot = () => (
   </Switch>
 );
 
-export default AppRoot;
+export default withAuthentication(AppRoot);
