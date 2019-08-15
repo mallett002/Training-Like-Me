@@ -8,7 +8,7 @@ export const setCurrentUser = (authUser) => ({
     type: SET_CURRENT_USER
 });
 
-export const signCurrentUserOut = () => ({
+export const removeCurrentUser = () => ({
     type: REMOVE_CURRENT_USER
 });
 

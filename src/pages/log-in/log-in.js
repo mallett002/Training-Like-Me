@@ -20,15 +20,20 @@ class LogIn extends Component {
     this.setState({ password: e.target.value });
   }
 
-  logUserIn = async() => {
+  logUserIn = async () => {
     const { firebase } = this.props;
     const { email, password } = this.state;
 
-    try {
-      await firebase.logInWithEmailAndPassword(email, password);
+    // dispatch loading action
+    const isLoggedIn = await firebase.logInWithEmailAndPassword(email, password);
+    
+    if (isLoggedIn) {
+      // set loading status to loaded
       goToRoute(COMMUNITY);
-    } catch(error) {
-      console.log({error});
+    } else {
+      // set loading status to loaded
+      console.log('login error');
+      // dispatch login error
     }
   }
 

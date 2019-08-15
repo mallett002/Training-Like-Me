@@ -13,8 +13,13 @@ class Firebase {
         this.auth.createUserWithEmailAndPassword(email, password);
     }
 
-    logInWithEmailAndPassword = (email, password) => {
-        this.auth.signInWithEmailAndPassword(email, password);
+    logInWithEmailAndPassword = async (email, password) => {
+        try {
+            await this.auth.signInWithEmailAndPassword(email, password);
+            return true;
+        } catch {
+            return false;
+        }
     }
 
     resetPassword = (email) => {
