@@ -5,6 +5,10 @@ import { LOG_IN } from '../../routes/routes';
 
 class Community extends Component {
 
+    componentDidMount() {
+        console.log(this.props.authUser);
+    }
+
     onSignOut = async () => {
         const { firebase } = this.props;
 

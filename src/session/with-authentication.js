@@ -14,16 +14,14 @@ const withAuthentication = (Component) => {
             this.handleOnAuthListener();
         }
 
-        componentDidUpdate(prevProps) {
-            if (prevProps.authUser !== this.props.authUser) {
-                this.handleOnAuthListener();
-            }
+        componentDidUpdate() {
+            this.handleOnAuthListener();
         }
 
         handleOnAuthListener = () => {
             this.props.firebase.onAuthListener(
-                (user) => this.props.setAuthUser(user),
-                () => this.props.removeAuthUser()
+                (user) => this.props.setCurrentUser(user),
+                () => this.props.removeCurrentUser()
             );
         }
 
@@ -49,6 +47,5 @@ const withAuthentication = (Component) => {
         ),
       )(WithAuthentication);;
 }
-
 
 export default withAuthentication;
